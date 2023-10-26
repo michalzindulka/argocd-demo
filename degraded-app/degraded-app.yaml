@@ -1,8 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Pod
 metadata:
   name: degraded-app
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: degraded-app
@@ -11,18 +12,13 @@ spec:
       labels:
         app: degraded-app
     spec:
-      initContainers:
-      - name: init
-        image: ubuntu
-        command: ['bash', '-c', 'exit 1;']
       containers:
-      - image: ubuntu
-        command: ['bash', '-c', 'exit 1;']
-        imagePullPolicy: IfNotPresent
-        name: ubuntu
+      - name: degraded-app
+        image: ubuntu
+        command: ["/bin/sh", "-c", "exit 1"]
         resources:
           limits:
-            memory: "128Mi"
             cpu: "100m"
-      restartPolicy: Always
+            memory: "128Mi"
+        restartPolicy: Never
 
