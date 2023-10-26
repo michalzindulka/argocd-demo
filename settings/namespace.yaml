@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ok-app
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: degraded-app
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: progressing-app
