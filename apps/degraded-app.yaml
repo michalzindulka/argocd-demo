@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: degraded-app
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-999"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: demo-project
+  source:
+    repoURL: https://github.com/michalzindulka/argocd-demo
+    targetRevision: main
+    path: degraded-app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: degraded-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

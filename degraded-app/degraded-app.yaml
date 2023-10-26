@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: degraded-app
+spec:
+  selector:
+    matchLabels:
+      app: degraded-app
+  template:
+    metadata:
+      labels:
+        app: degraded-app
+    spec:
+      containers:
+      - image: ubuntu
+        command:
+        - "exit"
+        - "1"
+        imagePullPolicy: IfNotPresent
+        name: ubuntu
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      restartPolicy: Always
+

@@ -1,0 +1,4 @@
+kind: Kustomization
+
+resources:
+- degraded-app.yaml
