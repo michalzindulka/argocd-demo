@@ -1,16 +1,21 @@
+# BEGIN: 5f3c8d2f7d8d
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ok-app
+  name: degraded-app
 spec:
   selector:
     matchLabels:
-      app: ok-app
+      app: degraded-app
   template:
     metadata:
       labels:
-        app: ok-app
+        app: degraded-app
     spec:
+      initContainers:
+      - name: wait-for-indefinitely
+        image: ubuntu
+        command: ['bash', '-c', 'while true; do sleep 30; done;']
       containers:
       - image: ubuntu
         command: ['bash', '-c', 'while true; do sleep 30; done;']
@@ -21,4 +26,5 @@ spec:
             memory: "128Mi"
             cpu: "500m"
       restartPolicy: Always
+# END: 5f3c8d2f7d8d
 
