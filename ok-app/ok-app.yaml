@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ok-app
+spec:
+  selector:
+    matchLabels:
+      app: ok-app
+  template:
+    metadata:
+      labels:
+        app: ok-app
+    spec:
+      containers:
+      - image: ubuntu
+        command:
+        - "sleep"
+        - "604800"
+        imagePullPolicy: IfNotPresent
+        name: ubuntu
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      restartPolicy: Always
+
