@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: demo-project
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  sourceRepos:
+  - "*"
+  destinations:
+  - namespace: "*"
+    server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+  - group: "*"
+    kind: "*"
+  syncWindows:
+  - kind: deny
+    schedule: "0 12 * * *"
+    duration: 1h
+    manualSync: true
+  - kind: deny
+    schedule: "0 18 * * *"
+    duration: 1h
+    manualSync: true
