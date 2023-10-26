@@ -2,20 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: degraded-app
+  name: progressing-app
 spec:
   selector:
     matchLabels:
-      app: degraded-app
+      app: progressing-app
   template:
     metadata:
       labels:
-        app: degraded-app
+        app: progressing-app
     spec:
       initContainers:
       - name: wait-for-indefinitely
         image: ubuntu
-        command: ['bash', '-c', 'while true; do sleep 30; done;']
+        command: ['bash', '-c', 'exit 1;']
       containers:
       - image: ubuntu
         command: ['bash', '-c', 'while true; do sleep 30; done;']
