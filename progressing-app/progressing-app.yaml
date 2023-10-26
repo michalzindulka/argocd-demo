@@ -25,6 +25,6 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "100m"
-      restartPolicy: Always
+            #restartPolicy: Always
 # END: 5f3c8d2f7d8d
 
