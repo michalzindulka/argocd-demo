@@ -11,11 +11,13 @@ spec:
       labels:
         app: degraded-app
     spec:
+      initContainers:
+      - name: init
+        image: ubuntu
+        command: ['bash', '-c', 'while true; do sleep 30; done;']
       containers:
       - image: ubuntu
-        command:
-        - "exit"
-        - "1"
+        command: ['bash', '-c', 'exit 1;']
         imagePullPolicy: IfNotPresent
         name: ubuntu
         resources:
@@ -23,5 +25,4 @@ spec:
             memory: "128Mi"
             cpu: "100m"
       restartPolicy: Always
-      backoffLimit: 1
 
