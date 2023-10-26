@@ -14,7 +14,7 @@ spec:
       initContainers:
       - name: init
         image: ubuntu
-        command: ['bash', '-c', 'while true; do sleep 30; done;']
+        command: ['bash', '-c', 'exit 1;']
       containers:
       - image: ubuntu
         command: ['bash', '-c', 'exit 1;']
